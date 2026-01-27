@@ -15,7 +15,7 @@ body {
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	display: flex;
 	flex-direction: column;
-	min-height: 100vh;
+	height: 100vh;
 }
 
 nav {
@@ -44,7 +44,15 @@ nav {
 }
 
 main {
+	padding: 1rem;
 	flex: 1;
+	overflow-y: scroll;
+	gap: 1rem;
+	display: flex;
+	flex-direction: column;
+	min-width: 75vw;
+	max-width: 90vw;
+	margin: 0 auto;
 }
 
 footer {
@@ -56,11 +64,53 @@ footer {
 }
 
 .page {
+	padding: 1rem;
+	border-radius: .5rem;;
 	display: none;
 	flex-direction: column;
 	align-items: center;
+	background-color: white;
+	box-shadow: 0 2px 5px -2px var(--dark);
+	width: 100%;
+	gap: 1rem;
 
 	&.show {
 		display: flex !important;
+	}
+}
+
+.page__titlebar {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+}
+
+.sections {
+	width: 100%;
+	display: flex;
+}
+
+.section {
+	width: 0%;
+	transition: width .2s linear;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	flex-wrap: nowrap;
+	white-space: nowrap;
+	min-width: 0;
+
+	.comment {
+		font-style: italic;
+		color: gray;
+		margin: auto;
+		max-width: 250px;
+		text-align: center;
+	}
+
+	&.show {
+		width: 100%;
 	}
 }
