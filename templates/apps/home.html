@@ -5,13 +5,30 @@
 	</div>
 	<div class="sections">
 		<div class="section show" id="home">
-			<span class="comment">
+			<span>
 				Welcome to Fixt. Please login to continue.
 			</span>
+			<img src="/static/tech.jpg" alt="Technician" width="220px">
 			<a href="/home/login">
-				<button>Login</button>
+				<button>Login Here</button>
 			</a>
+			{% include 'components/registerlink.html' %}
 		</div>
 		{% include 'home/login.html' %}
+		<div class="section" id="register">
+			<form id="registerform">
+				<div>
+					<label for="company">Company Name</label>
+					<input type="text" id="company">
+				</div>
+				<div class="formrow">
+					<button>Sign Up</button>
+					OR
+					<a href="/home/login">
+						<button class="yellow">Login</button>
+					</a>
+				</div>
+			</form>
+		</div>
 	</div>
 </div>

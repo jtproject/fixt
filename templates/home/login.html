@@ -24,9 +24,7 @@
 		</div>
 		<span id="login-error" class="error" style="display:none;"></span>
 		<button type="submit">Login</button>
-		<span>
-			New company accounts can register <a href="/home/register">here</a>.
-		</span>
+		{% include 'components/registerlink.html' %}
 	</form>
 	<script>
 		const loginform = document.getElementById('loginform')
