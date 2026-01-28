@@ -1,0 +1,49 @@
+<div class="section" id="login">
+	<div class="comment small">
+		Please enter your user information in the form below to access your account.
+	</div>
+	<form id="loginform">
+		<div>
+			<label for="company">Company ID</label>
+			<input type="text" id="company" name="company" required>
+		</div>
+		<div>
+			<label for="username">Username</label>
+			<input type="text" id="username" name="username" required>
+		</div>
+		<div>
+			<label for="password">Password</label>
+			<input type="password" id="password" name="password" required>
+		</div>
+		<div>
+			<div class="formrow">
+				<label for="remember">Remember Me</label>
+				<input type="checkbox" name="remember" id="remember">
+			</div>
+			<a href="/home/forgot" class="small">Forgot Credentials?</a>
+		</div>
+		<span id="login-error" class="error" style="display:none;"></span>
+		<button type="submit">Login</button>
+		<span>
+			New company accounts can register <a href="/home/register">here</a>.
+		</span>
+	</form>
+	<script>
+		const loginform = document.getElementById('loginform')
+		loginform.onsubmit = async (e) => {
+			e.preventDefault()
+			const { company, username, password } = Object.fromEntries(new FormData(loginform))
+			const errorSpan = loginform.querySelector('#login-error')
+			
+			try {
+				errorSpan.style.display = 'none'
+				await API.login(username, password)
+				changeSection('home')
+				console.log('Login successful')
+			} catch (error) {
+				errorSpan.textContent = error.message || 'Login failed'
+				errorSpan.style.display = 'block'
+			}
+		}
+	</script>
+</div>
