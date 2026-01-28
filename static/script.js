@@ -1,16 +1,21 @@
-const main = document.querySelector('#root')
-if (!main) throw Error('App cannot run. No #root found.')
+function getRoot (root = 'root') {
+	const main = document.querySelector('#' + root)
+	if (!main) throw Error('App cannot run. No root element found.')
+	return main
+}
 
 const pages = {}
 const defaultPage = 'home'
-// const defaultSection = 'home'
+const defaultSection = 'home'
+
+const HISTORY = {}
+
 const VARS = {
 	showClass: 'show',
 	activeApp: defaultPage,
-	// activeSection: defaultSection
 }
 
-function compilePages () {
+function compilePages (main) {
 	const children = Array.from(main.children)
 	children.forEach(child => {
 		pages[child.id] = {
@@ -59,7 +64,8 @@ function hideAllApps () {
 }
 
 function appLoad () {
-	compilePages()
+	const main = getRoot('root')
+	compilePages(main)
 	activateLinks()
 	changeApp(defaultPage)
 }

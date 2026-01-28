@@ -13,7 +13,48 @@
 			</a>
 		</div>
 		<div class="section" id="login">
-			Login
+			<div class="comment small">
+				Please enter your user information in the form below to access your account.
+			</div>
+			<form id="loginform">
+				<div>
+					<label for="company">Company ID</label>
+					<input type="text" id="company">
+				</div>
+				<div>
+					<label for="username">User ID</label>
+					<input type="text" id="username">
+				</div>
+				<div>
+					<label for="password">Password</label>
+					<input type="password" id="password">
+				</div>
+				<div>
+					<div class="formrow">
+						<label for="remember">Remember Me</label>
+						<input type="checkbox" name="remember" id="remember">
+					</div>
+					<a href="/home/forgot" class="small">Forgot Credentials?</a>
+				</div>
+				<button>Login</button>
+				<span>
+					New business accounts can register <a href="/home/register">here</a>.
+				</span>
+				<script>
+					const loginform = document.getElementById('loginform')
+					loginform.onsubmit = (e) => {
+						e.preventDefault()
+						const formData = new FormData(e.target)
+						fetch('http://localhost:8000/login', {
+							method: 'POST',
+							mode: 'cors',
+							body: JSON.stringify(formData)
+						}).then(r => r.json()).then(data => {
+							changeSection('home')
+						})
+					}
+				</script>
+			</form>
 		</div>
 	</div>
 </div>

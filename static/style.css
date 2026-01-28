@@ -2,6 +2,7 @@
 	--dark: #071621;
 	--light: #dadada;
 	--yellow: #ffed33;
+	--blue: #126170;
 }
 
 * {
@@ -11,7 +12,7 @@
 }
 
 body {
-	background-color: var(--light);
+	background-image: linear-gradient(to bottom, var(--light), #ededed);
 	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 	display: flex;
 	flex-direction: column;
@@ -25,7 +26,7 @@ nav {
 	align-items: baseline;
 	padding: 2px 1rem;
 	font-variant: small-caps;
-	
+	border-bottom: 2px solid var(--yellow);
 	
 	h2 a {
 		color: var(--yellow) !important;
@@ -43,6 +44,10 @@ nav {
 	}
 }
 
+a {
+	width: fit-content;
+}
+
 main {
 	padding: 1rem;
 	flex: 1;
@@ -56,10 +61,10 @@ main {
 }
 
 footer {
-	background-color: var(--yellow);
+	background-color: var(--blue);
 	font-size: .8rem;
-	border-top: 2px solid var(--dark);
-	color: var(--dark);
+	border-top: 2px solid var(--yellow);
+	color: var(--light);
 	padding: 2px 1rem;
 }
 
@@ -83,6 +88,8 @@ footer {
 	display: flex;
 	width: 100%;
 	justify-content: space-between;
+	border-bottom: 1px solid var(--dark);
+	padding-bottom: 1rem;
 }
 
 .sections {
@@ -95,6 +102,7 @@ footer {
 	transition: width .2s linear;
 	display: flex;
 	flex-direction: column;
+	height: fit-content;
 	gap: 1rem;
 	overflow-x: hidden;
 	overflow-y: hidden;
@@ -112,5 +120,54 @@ footer {
 
 	&.show {
 		width: 100%;
+		white-space: initial;
 	}
+}
+
+form {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+	align-items: center;
+
+	label {
+		font-weight: 700;
+		font-size: .8rem;
+	}
+
+	input {
+		border-radius: 9999px;
+		border: 1px solid var(--dark);
+		color: var(--dark);
+		background-color: var(--light);
+		padding: 2px .5rem;
+	}
+
+	button {
+		background-color: var(--blue);
+		color: var(--yellow);
+		border: 1px solid var(--yellow);
+		font-weight: 700;
+		letter-spacing: 1.2px;
+		padding: .5rem 1rem;
+		border-radius: .5rem;
+	}
+
+	a {
+		color: var(--blue);
+	}
+	
+	.formrow {
+		flex-direction: row !important;
+		gap: .5rem;
+	}
+}
+
+form div {
+	display: flex;
+	flex-direction: column;
+}
+
+.small {
+	font-size: .8rem;
 }
