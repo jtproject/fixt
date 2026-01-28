@@ -15,6 +15,37 @@ const VARS = {
 	activeApp: defaultPage,
 }
 
+// Local Storage keys
+const PAGE_LOCATION_KEY = 'fixt_current_page'
+const PAGE_SECTION_KEY = 'fixt_current_section'
+
+/**
+ * Save current page location to localStorage
+ */
+function savePageLocation (app, section = null) {
+	localStorage.setItem(PAGE_LOCATION_KEY, app)
+	if (section) {
+		localStorage.setItem(PAGE_SECTION_KEY, section)
+	}
+}
+
+/**
+ * Get saved page location from localStorage
+ */
+function getSavedPageLocation () {
+	const page = localStorage.getItem(PAGE_LOCATION_KEY)
+	const section = localStorage.getItem(PAGE_SECTION_KEY)
+	return { page: page || defaultPage, section: section || null }
+}
+
+/**
+ * Clear saved page location
+ */
+function clearPageLocation () {
+	localStorage.removeItem(PAGE_LOCATION_KEY)
+	localStorage.removeItem(PAGE_SECTION_KEY)
+}
+
 function compilePages (main) {
 	const children = Array.from(main.children)
 	children.forEach(child => {
@@ -43,11 +74,13 @@ function changeApp (name) {
 	hideAllApps()
 	pages[name].page.classList.add(VARS.showClass)
 	VARS.activeApp = name
+	savePageLocation(name)
 }
 
 function changeSection (name) {
 	hideAllSections()
 	pages[VARS.activeApp].sections[name].classList.add(VARS.showClass)
+	savePageLocation(VARS.activeApp, name)
 }
 
 function hideAllSections () {
@@ -67,7 +100,22 @@ function appLoad () {
 	const main = getRoot('root')
 	compilePages(main)
 	activateLinks()
-	changeApp(defaultPage)
+	
+	// Check if user is authenticated
+	const isAuthenticated = API.isAuthenticated()
+	
+	if (!isAuthenticated) {
+		// If not authenticated, always show login page
+		changeApp('home')
+		changeSection('home')
+	} else {
+		// If authenticated, restore previous page location
+		const savedLocation = getSavedPageLocation()
+		changeApp(savedLocation.page)
+		if (savedLocation.section && pages[savedLocation.page].sections[savedLocation.section]) {
+			changeSection(savedLocation.section)
+		}
+	}
 }
 
 appLoad()

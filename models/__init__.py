@@ -1,5 +1,5 @@
 from .customer import Customer
-from .employee import Employee
+from .employee import User
 from .admin import Admin
 from .tech import Tech
 from .job import Job
@@ -8,7 +8,8 @@ from .expense import Expense
 
 model_register = {
 	'customer': Customer,
-	'employee': Employee,
+	'user': User,
+	'employee': User,  # backward compatibility
 	'admin': Admin,
 	'tech': Tech,
 	'job': Job,

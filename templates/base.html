@@ -16,6 +16,7 @@
 			<li><a href="/customers">Customers</a></li>
 			<li><a href="/timeclock">Time Clock</a></li>
 			<li><a href="/employees">Employees</a></li>
+			<li><a href="#" onclick="API.logout(); location.reload();" id="logout-btn" style="display:none;">Logout</a></li>
 		</ul>
 	</nav>
 	<main id="root" class="loading">
@@ -29,6 +30,16 @@
 	<footer>
 		c.2026, by Jason Thompson
 	</footer>
+	<script src="/static/api.js"></script>
 	<script src="/static/script.js"></script>
+	<script>
+		// Show/hide logout button based on auth state
+		window.addEventListener('load', () => {
+			const logoutBtn = document.getElementById('logout-btn')
+			if (API.isAuthenticated()) {
+				logoutBtn.style.display = 'inline'
+			}
+		})
+	</script>
 </body>
 </html>
