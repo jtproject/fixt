@@ -24,7 +24,7 @@ nav {
 	background-color: var(--dark);
 	display: flex;
 	justify-content: space-between;
-	align-items: baseline;
+	align-items: start;
 	padding: 2px 1rem;
 	font-variant: small-caps;
 	border-bottom: 2px solid var(--yellow);
@@ -37,7 +37,25 @@ nav {
 	ul {
 		list-style: none;
 		display: flex;
-		gap: 1rem;
+		align-items: flex-end;
+		height: 100%;
+	}
+
+	li {
+		height: 100%;
+		padding-inline: .5rem;
+		display: flex;
+		align-items: flex-end;
+		transition: background-image .2s linear;
+	
+		&:hover {
+		margin-top: auto;
+			background-image: linear-gradient(to bottom, var(--dark), var(--blue));
+		}
+
+		&:last-child {
+			margin-right: -.5rem;
+		}
 	}
 
 	a {
