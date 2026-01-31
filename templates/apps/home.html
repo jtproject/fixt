@@ -4,31 +4,8 @@
 		<h1>Fixt Service Management</h1>
 	</div>
 	<div class="sections">
-		<div class="section show" id="home">
-			<span>
-				Welcome to Fixt. Please login to continue.
-			</span>
-			<img src="/static/tech.jpg" alt="Technician" width="220px">
-			<a href="/home/login">
-				<button>Login Here</button>
-			</a>
-			{% include 'components/registerlink.html' %}
-		</div>
+		{% include 'home/index.html' %}
 		{% include 'home/login.html' %}
-		<div class="section" id="register">
-			<form id="registerform">
-				<div>
-					<label for="company">Company Name</label>
-					<input type="text" id="company">
-				</div>
-				<div class="formrow">
-					<button>Sign Up</button>
-					OR
-					<a href="/home/login">
-						<button class="yellow">Login</button>
-					</a>
-				</div>
-			</form>
-		</div>
+		{% include 'home/register.html' %}
 	</div>
 </div>
