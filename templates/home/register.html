@@ -1,10 +1,69 @@
 <div class="section" id="register">
 	<form id="registerform">
 		<div>
-			<label for="company">Company Name</label>
-			<input type="text" id="company">
+			<label for="first_name">First Name</label>
+			<input type="text" id="first_name">
+		</div>
+		<div>
+			<label for="last_name">Last Name</label>
+			<input type="text" id="last_name">
+		</div>
+		<div>
+			<label for="email">E-Mail</label>
+			<input type="text" id="email">
+		</div>
+		<div class="formrow">
+			<label for="hasid">I have a company ID</label>
+			<input type="checkbox" name="hasid" id="hasid">
+		</div>
+		<div class="hide">
+			<label for="company_id">Company ID</label>
+			<input type="text" id="company_id">
+		</div>
+		<div class="hide">
+			<label for="username">Pick A Username</label>
+			<input type="text" id="username">
+		</div>
+		<div>
+			<label for="password">Create Password</label>
+			<input type="password" id="password">
+		</div>
+		<div>
+			<label for="confirm">Confirm Password</label>
+			<input type="password" id="confirm">
+		</div>
+		<div class="hide error" id="formerror">
+			Something is wrong.
 		</div>
 		<button>Sign Up</button>
 		{% include 'components/loginlink.html' %}
 	</form>
+	<script>
+		const registerform = document.getElementById('registerform')
+		if (!registerform) {
+			document.querySelector('main').innerHTML = 'Form not found.'
+		}
+		else {
+			const registerCheckbox = registerform.querySelector('#hasid')
+			const companyIdInput = registerform.querySelector('#company_id').parentElement
+			const usernameInput = registerform.querySelector('#username').parentElement
+			if (registerCheckbox.value === true) {
+				companyIdInput.classList.remove('hide')
+			}
+			else {
+				usernameInput.classList.remove('hide')
+			}
+			registerCheckbox.onclick = (e) => {
+				companyIdInput.classList.toggle('hide')				
+				usernameInput.classList.toggle('hide')				
+			}
+		}
+		const registerformerror = registerform.querySelector('#formerror')
+		registerform.onsubmit = (e) => {
+			registerformerror.classList.add('hide')
+			e.preventDefault()
+			const data = new FormData(e.target)
+			if (data.password !== data.confirm) registerformerror.classList.remove('hide')
+		}
+	</script>
 </div>

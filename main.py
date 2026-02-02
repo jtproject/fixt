@@ -69,7 +69,7 @@ async def login(request: Request, session: Session = Depends(get_session)):
 		raise HTTPException(status_code=400, detail="Username and password required")
 	
 	# Query user by email or name
-	user = session.exec(select(User).where((User.email == username) | (User.name == username))).first()
+	user = session.exec(select(User).where((User.email == username) | (User.username == username))).first()
 	
 	if not user or not user.verify_password(password):
 		raise HTTPException(status_code=401, detail="Invalid credentials")
@@ -96,6 +96,11 @@ def get_current_user(user_id: int = Depends(verify_token), session: Session = De
 	if not user:
 		raise HTTPException(status_code=404, detail="User not found")
 	return JSONResponse(content=user.model_dump(), status_code=200)
+
+@app.post('/api/register', response_class=JSONResponse)
+async def register (request: Request, session: Session = Depends(get_session)):
+	body = await request.json()
+		
 
 @app.get('/api/{model_name}', response_class=JSONResponse)
 def read_all (model_name: str, session: Session = Depends(get_session)):
